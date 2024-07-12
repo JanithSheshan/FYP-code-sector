@@ -11,7 +11,7 @@ folder_path = 'dataset'
 channels = ['Fp1.', 'Fp2.', 'Fz..', 'F3..', 'F4..', 'C3..', 'C4..', 'P3..', 'P4..']
 
 # Define frequency bands
-bands = {'theta': (4, 8), 'alpha': (8, 12), 'beta': (12, 30), 'gamma': (30, 50)}
+bands = {'theta': (4, 8), 'alpha': (8, 13), 'beta': (13, 30), 'gamma': (30, 50)}
 
 def preprocess_and_extract_features(file_path):
     # Load the .edf file
@@ -39,8 +39,7 @@ def preprocess_and_extract_features(file_path):
     # Define epochs for each event type
     epochs = {}
     for event_type in event_id:
-        epochs[event_type] = mne.Epochs(raw, events, event_id=event_id[event_type], 
-                                        tmin=0, tmax=1, baseline=None, preload=True)
+        epochs[event_type] = mne.Epochs(raw, events, event_id=event_id[event_type], tmin=0, tmax=1, baseline=None, preload=True)
     
     # Initialize a dictionary to hold the differential entropy features for each event type
     all_de_features = {'filename': os.path.basename(file_path)}
